@@ -4,6 +4,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const firebase = require("firebase");
 
+const bodyParser = require('body-parser');
+const { graphqlHTTP } = require("express-graphql");
+const cors = require('cors');
+
+
 const config = {
     apiKey: "AIzaSyDmnIhgnSPhAfJ7Gtp9aInxC7vIDhvNUGE",
     authDomain: "myphonebook-56b20.firebaseapp.com",
@@ -27,7 +32,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+const userSchema = require('./graphQl').userSchema;
+app.use('/graphql', cors(), graphqlHTTP({
+  schema: userSchema,
+  rootValue: global,
+  graphiql: true
+}));
+
 
 module.exports = app; 

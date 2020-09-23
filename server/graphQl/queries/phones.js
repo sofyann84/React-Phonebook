@@ -10,7 +10,7 @@ exports.queryType = new GraphQLObjectType({
     return {
       phones: {
         type: new GraphQLList(phoneType),
-        resolve: services.getUsers
+        resolve: services.getPhones
       }
     }
   }

@@ -3,7 +3,7 @@ const firebase = require("firebase");
 const getPhones = () => {
   const phoneReference = firebase.database().ref("/Phones/");
   return (new Promise((resolve, reject)=>{
-    userReference.on("value", function(snapshot) {
+    phoneReference.on("value", function(snapshot) {
       const folders = snapshot.val();
       if (folders === null) {
         resolve([]);
@@ -39,7 +39,7 @@ const updatePhone = (phone) => {
   var referencePath = `/Phones/${phone.id}/`;
   var phoneReference = firebase.database().ref(referencePath);
   return (new Promise((resolve, reject) => {
-    userReference.update({Name: phone.Name, PhoneNumber: phone.PhoneNumber}, (error) => {
+    phoneReference.update({Name: phone.Name, PhoneNumber: phone.PhoneNumber}, (error) => {
       if (error) {
         reject("Data could not be updated." + error);
       } else {
