@@ -2,17 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import UserBox from './components/UserBox';
+import PhoneBox from './containers/PhoneBox';
 import rootReducer from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>
-  <UserBox />
+  <PhoneBox />
   </Provider>
   , document.getElementById('root'));
 
